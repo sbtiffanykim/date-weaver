@@ -1,13 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
-from pydantic import BaseModel
 from excel_utils import generate_excel
-
-
-class ExcelGenerationRequest(BaseModel):
-    start_date: str
-    end_date: str
-    repeat_num: int
+from models import ExcelGenerationRequest
 
 
 app = FastAPI()

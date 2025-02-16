@@ -25,14 +25,7 @@ def convert_day(day):
     return days[day]
 
 
-def generate_excel(start_date: str, end_date: str, repeat_num: int):
-
-    start = datetime.datetime.strptime(start_date, "%Y-%m-%d").date()
-    end = datetime.datetime.strptime(end_date, "%Y-%m-%d").date()
-
-    # Validate that start_date is before end_date
-    if start > end:
-        raise HTTPException(status_code=400, detail="Start date must be before end date.")
+def generate_excel(start_date, end_date, repeat_num):
 
     difference = (end - start).days
     file = Workbook()
