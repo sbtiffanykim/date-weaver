@@ -169,3 +169,7 @@ web/.yarn/*
 
 # Ignore created files
 temp_file/
+
+# Frontend ignores
+frontend/node_modules
+frontend/dist
