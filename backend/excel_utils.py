@@ -27,13 +27,13 @@ def convert_day(day):
 
 def generate_excel(start_date, end_date, repeat_num):
 
-    difference = (end - start).days
+    difference = (end_date - start_date).days
     file = Workbook()
 
     # Create list of dates from start_date to end_date
     datelist = []
     for i in range(difference + 1):
-        date = start + datetime.timedelta(days=i)
+        date = start_date + datetime.timedelta(days=i)
         day = convert_day(date.weekday())
         formatted_date = date.strftime("20%y년 %m월 %d일") + f"({day})"
         datelist.append(formatted_date)
@@ -64,7 +64,7 @@ def generate_excel(start_date, end_date, repeat_num):
     os.makedirs(save_dir, exist_ok=True)  # Create directory if it doesn't exist
 
     # Save the file
-    filename = f"{start.month}월 - {end.month}월.xlsx"
+    filename = f"{start_date.month}월 - {end_date.month}월.xlsx"
     full_path = os.path.join(save_dir, filename)
 
     file.save(full_path)
