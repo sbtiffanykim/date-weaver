@@ -1,22 +1,9 @@
-import datetime
+from datetime import timedelta
 import os
 from openpyxl import Workbook
 from openpyxl.styles import PatternFill
 from fastapi import HTTPException
-
-
-# Define national holidays
-national_holidays = [
-    "01월 01일",
-    "03월 01일",
-    "05월 05일",
-    "05월 15일",
-    "06월 06일",
-    "08월 15일",
-    "10월 03일",
-    "10월 09일",
-    "12월 25일",
-]
+from urls import get_holidays
 
 
 # Convert weekday index to Korean name
@@ -26,7 +13,7 @@ def convert_day(day):
 
 
 def generate_excel(start_date, end_date, repeat_num):
-
+    national_holidays = get_holidays(start_date, end_date)
     difference = (end_date - start_date).days
     file = Workbook()
 
@@ -56,7 +43,7 @@ def generate_excel(start_date, end_date, repeat_num):
                 cell.fill = PatternFill(start_color="ffcccc", end_color="ffcccc", fill_type="solid")
 
             # Highlight national holidays in orange
-            if any(holiday in item for holiday in national_holidays):
+            if item.split("(")[0] in national_holidays:
                 cell.fill = PatternFill(start_color="f5c77e", end_color="f5c77e", fill_type="solid")
 
     # Define the save directory
